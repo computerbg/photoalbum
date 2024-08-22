@@ -1,6 +1,7 @@
 package com.example.photoalbum.service;
 
 import com.example.photoalbum.domain.Album;
+import com.example.photoalbum.dto.AlbumDto;
 import com.example.photoalbum.repository.AlbumRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ class AlbumServiceTest {
         album.setAlbumName("테스트");
         Album savedAlbum = albumRepository.save(album);
 
-        Album resAlbum = albumService.getAlbum(savedAlbum.getAlbumId());
+        AlbumDto resAlbum = albumService.getAlbum(savedAlbum.getAlbumId());
         assertEquals("테스트",resAlbum.getAlbumName());
     }
 }
