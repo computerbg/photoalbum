@@ -18,7 +18,7 @@ public class Album {
 
     @Column(name = "created_at",unique = false,nullable = true)
     @CreationTimestamp
-    private Date createAt;
+    private Date createdAt;
 
     public Album(){};
 
@@ -39,10 +39,10 @@ public class Album {
     }
 
     public Date getCreateAt() {
-        return createAt;
+        return createdAt;
     }
 
     public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
+        this.createdAt = createAt;
     }
 }

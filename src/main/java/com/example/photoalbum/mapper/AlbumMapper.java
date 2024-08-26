@@ -3,6 +3,9 @@ package com.example.photoalbum.mapper;
 import com.example.photoalbum.domain.Album;
 import com.example.photoalbum.dto.AlbumDto;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class AlbumMapper {
     public static AlbumDto convertToDto(Album album){
         AlbumDto albumDto = new AlbumDto();
@@ -20,5 +23,8 @@ public class AlbumMapper {
         return album;
     }
 
+    public static List<AlbumDto> convertToDtoList(List<Album> albums)  {
+        return albums.stream().map(AlbumMapper::convertToDto).collect(Collectors.toList());
+    }
 
 }

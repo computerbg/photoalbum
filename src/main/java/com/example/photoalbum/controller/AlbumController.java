@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController // 해당 클래스가 spring에서 관리하는 컨트롤러임을 나타내고 Rest API를 사용할 것임을 나타냄
 @RequestMapping("/albums") // 해당 컨트롤러가 처리할 URL 경로의 앞부분을 나타냄 위에 파일에서는 https://<url>/albums 으로 들어오는 모든 요청은 해당 컨트롤러의 메서드에서 처리하게 됩니다.
@@ -32,5 +33,19 @@ public class AlbumController {
 
     }
 
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public ResponseEntity<List<AlbumDto>>
+    getAlbumList(@RequestParam(value = "keyword", required = false,defaultValue = "") final String keyword,
+                 @RequestParam(value = "sort",required = false,defaultValue = "byDate") final String sort){
+        List<AlbumDto> albumDtos = albumService.getAlbumList(keyword,sort);
+        return new ResponseEntity<>(albumDtos,HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{albumId}",method = RequestMethod.PUT)
+    public ResponseEntity<AlbumDto> updateAlbum(@PathVariable("albumId") final long albumId,
+                                                @RequestBody final AlbumDto albumDto){
+        AlbumDto res = albumService.changeName(albumId,albumDto);
+        return new ResponseEntity<>(res,HttpStatus.OK);
+    }
 
 }
