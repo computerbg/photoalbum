@@ -1,5 +1,6 @@
 package com.example.photoalbum.service;
 
+import com.example.photoalbum.Constants;
 import com.example.photoalbum.domain.Album;
 import com.example.photoalbum.domain.Photo;
 import com.example.photoalbum.dto.AlbumDto;
@@ -13,6 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -76,6 +79,19 @@ class AlbumServiceTest {
     }
 
     @Test
+    @DisplayName("앨범 생성하기 및 바로 폴더 삭제")
+    void testAlbumCreate() throws IOException {
+        AlbumDto albumDto = new AlbumDto();
+        albumDto.setAlbumName("테스트");
+        AlbumDto savedAlbumDto = albumService.createAlbum(albumDto);
+        assertEquals("테스트",savedAlbumDto.getAlbumName());
+        Files.delete(Paths.get(Constants.PATH_PREFIX+"/photos/original/"+savedAlbumDto.getAlbumId()));
+        Files.delete(Paths.get(Constants.PATH_PREFIX+"/photos/thumb/"+savedAlbumDto.getAlbumId()));
+    }
+
+
+
+    @Test
     @DisplayName("앨범 목록")
     void testAlbumRepository() throws InterruptedException {
         Album album1 = new Album();
@@ -98,6 +114,34 @@ class AlbumServiceTest {
         assertEquals("aaaa", resName.get(0).getAlbumName()); // 0번째 Index가 두번째 앨범명 aaaa 인지 체크
         assertEquals("aaab", resName.get(1).getAlbumName()); // 1번째 Index가 두번째 앨범명 aaab 인지 체크
         assertEquals(2, resName.size()); // aaa 이름을 가진 다른 앨범이 없다는 가정하에, 검색 키워드에 해당하는 앨범 필터링 체크
+    }
+
+    @Test
+    @DisplayName("앨범 삭제")
+    void testDeleteAlbum() throws IOException {
+        //앨범 생성 후 삭제랑
+        //앨범 생성 후 사진넣고 삭제
+        AlbumDto albumDto = new AlbumDto();
+        albumDto.setAlbumName("삭제할거임");
+        AlbumDto res = albumService.createAlbum(albumDto);
+
+        AlbumMapper albumMapper = new AlbumMapper();
+        Album album =albumMapper.convertToModel(res);
+
+        Long albumId = res.getAlbumId();
+        Photo photo1 = new Photo();
+        photo1.setFileName("사진1");
+        photo1.setAlbum(album);
+        photoRepository.save(photo1);
+
+        Photo photo2 = new Photo();
+        photo2.setFileName("사진2");
+        photo2.setAlbum(album);
+
+        photoRepository.save(photo2); // 사진이 있을 때에도 정상 작동하는지 평가
+        albumService.deleteAlbum(albumId);
+
+
     }
 
     @Test

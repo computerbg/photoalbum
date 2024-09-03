@@ -1,6 +1,7 @@
 package com.example.photoalbum.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class PhotoDto {
     private Long photoId;
@@ -10,6 +11,7 @@ public class PhotoDto {
     private String thumbUrl;
     private Date uploadedAt;
     private Long albumId;
+
 
     public Long getPhotoId() {
         return photoId;

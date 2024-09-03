@@ -23,7 +23,7 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">1</div>
+<div class="counter">7</div>
 <p>tests</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.608s</div>
+<div class="counter">1.739s</div>
 <p>duration</p>
 </div>
 </td>
@@ -73,13 +73,51 @@
 <thead>
 <tr>
 <th>Test</th>
+<th>Method name</th>
 <th>Duration</th>
 <th>Result</th>
 </tr>
 </thead>
 <tr>
+<td class="success">앨범 가져오기</td>
+<td class="success">getAlbum()</td>
+<td class="success">0.008s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">getAlbumUseAlbumName()</td>
+<td class="success">getAlbumUseAlbumName()</td>
+<td class="success">0.117s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">앨범 생성하기 및 바로 폴더 삭제</td>
+<td class="success">testAlbumCreate()</td>
+<td class="success">0.508s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">앨범 목록</td>
+<td class="success">testAlbumRepository()</td>
+<td class="success">1.026s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">앨범 바꾸기</td>
+<td class="success">testChangeAlbumName()</td>
+<td class="success">0.027s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">앨범 삭제</td>
+<td class="success">testDeleteAlbum()</td>
+<td class="success">0.028s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
 <td class="success">testPhotoCount()</td>
-<td class="success">0.608s</td>
+<td class="success">testPhotoCount()</td>
+<td class="success">0.025s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -87,8 +125,8 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>00:18:15.836 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.photoalbum.service.AlbumServiceTest]: AlbumServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-00:18:15.955 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.photoalbum.PhotoalbumApplication for test class com.example.photoalbum.service.AlbumServiceTest
+<pre>19:15:41.557 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.photoalbum.service.AlbumServiceTest]: AlbumServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+19:15:41.721 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.photoalbum.PhotoalbumApplication for test class com.example.photoalbum.service.AlbumServiceTest
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -99,24 +137,39 @@
 
  :: Spring Boot ::                (v3.3.2)
 
-2024-08-27T00:18:16.375+09:00  INFO 1568 --- [photoalbum] [    Test worker] c.e.photoalbum.service.AlbumServiceTest  : Starting AlbumServiceTest using Java 17 with PID 1568 (started by kbi04 in C:\Users\kbi04\OneDrive\바탕 화면\photoalbum)
-2024-08-27T00:18:16.376+09:00  INFO 1568 --- [photoalbum] [    Test worker] c.e.photoalbum.service.AlbumServiceTest  : No active profile set, falling back to 1 default profile: &quot;default&quot;
-2024-08-27T00:18:17.090+09:00  INFO 1568 --- [photoalbum] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-08-27T00:18:17.160+09:00  INFO 1568 --- [photoalbum] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 59 ms. Found 2 JPA repository interfaces.
-2024-08-27T00:18:17.646+09:00  INFO 1568 --- [photoalbum] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-08-27T00:18:17.727+09:00  INFO 1568 --- [photoalbum] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
-2024-08-27T00:18:17.773+09:00  INFO 1568 --- [photoalbum] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2024-08-27T00:18:18.152+09:00  INFO 1568 --- [photoalbum] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-08-27T00:18:18.180+09:00  INFO 1568 --- [photoalbum] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2024-08-27T00:18:18.540+09:00  INFO 1568 --- [photoalbum] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2be50bba
-2024-08-27T00:18:18.544+09:00  INFO 1568 --- [photoalbum] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2024-08-27T00:18:19.590+09:00  INFO 1568 --- [photoalbum] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2024-08-27T00:18:19.693+09:00  INFO 1568 --- [photoalbum] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-08-27T00:18:20.172+09:00  WARN 1568 --- [photoalbum] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2024-08-27T00:18:20.577+09:00  INFO 1568 --- [photoalbum] [    Test worker] c.e.photoalbum.service.AlbumServiceTest  : Started AlbumServiceTest in 4.451 seconds (process running for 5.623)
+2024-09-01T19:15:42.215+09:00  INFO 1004 --- [photoalbum] [    Test worker] c.e.photoalbum.service.AlbumServiceTest  : Starting AlbumServiceTest using Java 17 with PID 1004 (started by kbi04 in C:\Users\kbi04\OneDrive\바탕 화면\photoalbum)
+2024-09-01T19:15:42.216+09:00  INFO 1004 --- [photoalbum] [    Test worker] c.e.photoalbum.service.AlbumServiceTest  : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2024-09-01T19:15:42.927+09:00  INFO 1004 --- [photoalbum] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-01T19:15:42.982+09:00  INFO 1004 --- [photoalbum] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 48 ms. Found 2 JPA repository interfaces.
+2024-09-01T19:15:43.411+09:00  INFO 1004 --- [photoalbum] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-01T19:15:43.484+09:00  INFO 1004 --- [photoalbum] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-09-01T19:15:43.526+09:00  INFO 1004 --- [photoalbum] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-09-01T19:15:43.873+09:00  INFO 1004 --- [photoalbum] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-01T19:15:43.900+09:00  INFO 1004 --- [photoalbum] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-09-01T19:15:44.150+09:00  INFO 1004 --- [photoalbum] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@75a9cc24
+2024-09-01T19:15:44.152+09:00  INFO 1004 --- [photoalbum] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-09-01T19:15:45.114+09:00  INFO 1004 --- [photoalbum] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-01T19:15:45.184+09:00  INFO 1004 --- [photoalbum] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-01T19:15:45.686+09:00  WARN 1004 --- [photoalbum] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-01T19:15:46.051+09:00  INFO 1004 --- [photoalbum] [    Test worker] c.e.photoalbum.service.AlbumServiceTest  : Started AlbumServiceTest in 4.147 seconds (process running for 5.307)
+Hibernate: insert into album (album_name,created_at) values (?,?)
+Hibernate: insert into album (album_name,created_at) values (?,?)
+Hibernate: select a1_0.album_id,a1_0.album_name,a1_0.created_at from album a1_0 where a1_0.album_name=?
 Hibernate: insert into album (album_name,created_at) values (?,?)
 Hibernate: insert into photo (album_id,file_name,file_size,original_url,thumb_url,uploaded_at) values (?,?,?,?,?,?)
 Hibernate: insert into photo (album_id,file_name,file_size,original_url,thumb_url,uploaded_at) values (?,?,?,?,?,?)
+Hibernate: insert into album (album_name,created_at) values (?,?)
+Hibernate: insert into photo (album_id,file_name,file_size,original_url,thumb_url,uploaded_at) values (?,?,?,?,?,?)
+Hibernate: insert into photo (album_id,file_name,file_size,original_url,thumb_url,uploaded_at) values (?,?,?,?,?,?)
+Hibernate: select count(p1_0.photo_id) from photo p1_0 where p1_0.album_id=?
+Hibernate: insert into album (album_name,created_at) values (?,?)
+Hibernate: update album set album_name=?,created_at=? where album_id=?
+Hibernate: select count(p1_0.photo_id) from photo p1_0 where p1_0.album_id=?
+Hibernate: insert into album (album_name,created_at) values (?,?)
+Hibernate: insert into album (album_name,created_at) values (?,?)
+Hibernate: select a1_0.album_id,a1_0.album_name,a1_0.created_at from album a1_0 where a1_0.album_name like ? escape '\\' order by a1_0.created_at desc
+Hibernate: select a1_0.album_id,a1_0.album_name,a1_0.created_at from album a1_0 where a1_0.album_name like ? escape '\\' order by a1_0.album_name
+Hibernate: insert into album (album_name,created_at) values (?,?)
 Hibernate: select count(p1_0.photo_id) from photo p1_0 where p1_0.album_id=?
 </pre>
 </span>
@@ -129,7 +182,7 @@ Hibernate: select count(p1_0.photo_id) from photo p1_0 where p1_0.album_id=?
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.8</a> at 2024. 8. 27. 오전 12:18:21</p>
+<a href="http://www.gradle.org">Gradle 8.8</a> at 2024. 9. 1. 오후 7:15:47</p>
 </div>
 </div>
 </body>
