@@ -9,6 +9,16 @@ public class AlbumDto {
     Date createdAt;
     int count;
 
+    private String userId;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     private List<String> thumbUrls;
 
     public List<String> getThumbUrls() {

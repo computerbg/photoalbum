@@ -4,15 +4,16 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name = "user",schema = "photo_albim",uniqueConstraints = {@UniqueConstraint(columnNames = "user_id")})
+@Table(name = "user",schema = "photo_album",uniqueConstraints = {@UniqueConstraint(columnNames = "user_id")})
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //가장 최근 id에 +1 을 해서 다음 아이디를 생성하는 코드
     @Column(name = "user_id",unique = true, nullable = false)
-    private long userId;
+    private String userId;
 
     @Column(name = "user_name",unique = false, nullable = false)
     private String userName;
@@ -30,15 +31,21 @@ public class User {
     @Column(name = "login_at", unique = false, nullable = true)
     private LocalDateTime login_at;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Album> albums = new ArrayList<>();
+    public User(){
+
+    }
+
     public void updateLoginTime(){
         this.login_at = LocalDateTime.now();
     }
 
-    public long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

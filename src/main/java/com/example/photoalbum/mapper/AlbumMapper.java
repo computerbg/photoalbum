@@ -12,6 +12,7 @@ public class AlbumMapper {
         albumDto.setAlbumId(album.getAlbumId());
         albumDto.setAlbumName(album.getAlbumName());
         albumDto.setCreatedAt(album.getCreateAt());
+        albumDto.setUserId(album.getUser().getUserId());
         return albumDto;
     }
 

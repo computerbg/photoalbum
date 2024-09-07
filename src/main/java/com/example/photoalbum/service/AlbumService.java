@@ -3,10 +3,12 @@ package com.example.photoalbum.service;
 import com.example.photoalbum.Constants;
 import com.example.photoalbum.domain.Album;
 import com.example.photoalbum.domain.Photo;
+import com.example.photoalbum.domain.User;
 import com.example.photoalbum.dto.AlbumDto;
 import com.example.photoalbum.mapper.AlbumMapper;
 import com.example.photoalbum.repository.AlbumRepository;
 import com.example.photoalbum.repository.PhotoRepository;
+import com.example.photoalbum.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,9 @@ public class AlbumService {
 
     @Autowired
     private PhotoRepository photoRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public AlbumDto getAlbumUseAlbumName(String albumName){// 앨범명으로 조회하기 8장 연습문제
         Optional<Album> res = albumRepository.findByAlbumName(albumName);
@@ -51,16 +56,22 @@ public class AlbumService {
         }
     }
 
-    public AlbumDto createAlbum(AlbumDto albumDto) throws IOException{
+    public AlbumDto createAlbum(AlbumDto albumDto,String userId) throws IOException{
         Album album = AlbumMapper.convertToModel(albumDto);
-        this.albumRepository.save(album);
-        this.createAlbumDirectories(album);
+        Optional<User> user = userRepository.findById(userId);
+        if(user.isEmpty()){
+            throw new EntityNotFoundException(String.format("No such user Id %s",userId));
+        }
+        User targetUser = user.get();
+        album.setUser(targetUser);
+        Album savedAlbum = this.albumRepository.save(album);
+        this.createAlbumDirectories(savedAlbum);
         return AlbumMapper.convertToDto(album);
     }
 
     private  void createAlbumDirectories(Album album) throws IOException{
-        Files.createDirectories(Paths.get(Constants.PATH_PREFIX+"/photos/original/"+album.getAlbumId()));
-        Files.createDirectories(Paths.get(Constants.PATH_PREFIX+"/photos/thumb/"+album.getAlbumId()));
+        Files.createDirectories(Paths.get(Constants.PATH_PREFIX+"/photos/original/"+album.getUser().getUserId()+"/"+album.getAlbumId()));
+        Files.createDirectories(Paths.get(Constants.PATH_PREFIX+"/photos/thumb/"+album.getUser().getUserId()+"/"+album.getAlbumId()));
     }
 
     public List<AlbumDto> getAlbumList(String keyword, String sort,String orderBy){
@@ -110,12 +121,12 @@ public class AlbumService {
     public void deleteAlbum(Long AlbumId) throws IOException {
         Optional<Album> album = this.albumRepository.findById(AlbumId);
         if(album.isEmpty()){
-            throw new NoSuchElementException(String.format("Album ID @d가 존재하지 않습니다",AlbumId));
+            throw new NoSuchElementException(String.format("Album ID %d가 존재하지 않습니다",AlbumId));
         }
         Album deleteTargetAlbum = album.get();
         this.albumRepository.deleteById(deleteTargetAlbum.getAlbumId()); // 엔티티 삭제 cascade된 관련 앤티티도 다 삭제
-        Files.delete(Paths.get(Constants.PATH_PREFIX+"/photos/original/"+deleteTargetAlbum.getAlbumId()));
-        Files.delete(Paths.get(Constants.PATH_PREFIX+"/photos/thumb/"+deleteTargetAlbum.getAlbumId()));
+        Files.delete(Paths.get(Constants.PATH_PREFIX+"/photos/original/"+deleteTargetAlbum.getUser().getUserId()+"/"+deleteTargetAlbum.getAlbumId()));
+        Files.delete(Paths.get(Constants.PATH_PREFIX+"/photos/thumb/"+deleteTargetAlbum.getUser().getUserId()+"/"+deleteTargetAlbum.getAlbumId()));
 
     }
 

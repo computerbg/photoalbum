@@ -11,7 +11,7 @@ import java.util.Date;
 public class Photo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //가장 최근 id에 +1을 해서 다음 아이디를 생성하는 코드
     @Column(name = "photo_id",unique = true, nullable = false)
     private Long photoId;
 

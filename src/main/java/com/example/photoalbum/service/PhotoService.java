@@ -75,11 +75,11 @@ public class PhotoService {
         String fileName =file.getOriginalFilename();
         int fileSize = (int)file.getSize();
         fileName = getNextFileName(fileName,albumId);
-        saveFile(file,albumId,fileName);
+        saveFile(file,res.get().getUser().getUserId(),albumId,fileName);
 
         Photo photo = new Photo();
-        photo.setOriginalUrl("/photos/original/" + albumId + "/" + fileName);
-        photo.setThumbUrl("/photos/thumb/"+albumId + "/" + fileName);
+        photo.setOriginalUrl("/photos/original/"+res.get().getUser().getUserId()+"/" + albumId + "/" + fileName);
+        photo.setThumbUrl("/photos/thumb/"+res.get().getUser().getUserId()+"/"+albumId + "/" + fileName);
         photo.setFileName(fileName);
         photo.setFileSize(fileSize);
         photo.setAlbum(res.get());
@@ -102,9 +102,9 @@ public class PhotoService {
         return fileName;
     }
 
-    private void saveFile(MultipartFile file, Long AlbumId, String fileName) throws IOException {
+    private void saveFile(MultipartFile file,String userId ,Long AlbumId, String fileName) throws IOException {
         try {
-            String filePath = AlbumId + "/" + fileName;
+            String filePath = userId+"/"+AlbumId + "/" + fileName;
             Files.copy(file.getInputStream(), Paths.get(original_path + "/" + filePath));
 
             BufferedImage thumbImg = Scalr.resize(ImageIO.read(file.getInputStream()), Constants.THUMB_SIZE, Constants.THUMB_SIZE);

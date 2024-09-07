@@ -19,7 +19,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 @RestController
-@RequestMapping("/albums/{albumId}/photos")
+@RequestMapping("/back_end/{userId}/albums/{albumId}/photos")
 public class PhotoController {
     @Autowired
     private PhotoService photoService;

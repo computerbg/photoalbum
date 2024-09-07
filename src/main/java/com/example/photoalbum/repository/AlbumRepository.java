@@ -10,6 +10,7 @@ import java.util.Optional;
 @Repository
 public interface AlbumRepository extends JpaRepository<Album,Long> {
 
+    int countByUser_UserId(String UserId); // 유저(ID)에 속해있는 구하기
     Optional<Album> findByAlbumName(String keyword);
     List<Album> findByAlbumNameContainingOrderByCreatedAtDesc(String keyword);
     List<Album> findByAlbumNameContainingOrderByCreatedAtAsc(String keyword);

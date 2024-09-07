@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController // 해당 클래스가 spring에서 관리하는 컨트롤러임을 나타내고 Rest API를 사용할 것임을 나타냄
-@RequestMapping("/albums") // 해당 컨트롤러가 처리할 URL 경로의 앞부분을 나타냄 위에 파일에서는 https://<url>/albums 으로 들어오는 모든 요청은 해당 컨트롤러의 메서드에서 처리하게 됩니다.
+@RequestMapping("/back_end/{userId}/albums") // 해당 컨트롤러가 처리할 URL 경로의 앞부분을 나타냄 위에 파일에서는 https://<url>/albums 으로 들어오는 모든 요청은 해당 컨트롤러의 메서드에서 처리하게 됩니다.
 @RequiredArgsConstructor
 public class AlbumController {
 
@@ -45,8 +45,9 @@ public class AlbumController {
     }
 
     @RequestMapping(value="",method = RequestMethod.POST)
-    public ResponseEntity<AlbumDto> createAlbum(@RequestBody final AlbumDto albumDto) throws IOException {
-        AlbumDto savedAlbumDto = albumService.createAlbum(albumDto);
+    public ResponseEntity<AlbumDto> createAlbum(@PathVariable("userId")final String userId,
+                                                @RequestBody final AlbumDto albumDto) throws IOException {
+        AlbumDto savedAlbumDto = albumService.createAlbum(albumDto,userId);
         return new ResponseEntity<>(savedAlbumDto,HttpStatus.OK);
 
     }

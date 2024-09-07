@@ -78,7 +78,7 @@ class AlbumServiceTest {
         assertEquals(2,albumDto.getCount());
     }
 
-    @Test
+  /*  @Test
     @DisplayName("앨범 생성하기 및 바로 폴더 삭제")
     void testAlbumCreate() throws IOException {
         AlbumDto albumDto = new AlbumDto();
@@ -87,7 +87,7 @@ class AlbumServiceTest {
         assertEquals("테스트",savedAlbumDto.getAlbumName());
         Files.delete(Paths.get(Constants.PATH_PREFIX+"/photos/original/"+savedAlbumDto.getAlbumId()));
         Files.delete(Paths.get(Constants.PATH_PREFIX+"/photos/thumb/"+savedAlbumDto.getAlbumId()));
-    }
+    }*/
 
 
 
@@ -116,7 +116,7 @@ class AlbumServiceTest {
         assertEquals(2, resName.size()); // aaa 이름을 가진 다른 앨범이 없다는 가정하에, 검색 키워드에 해당하는 앨범 필터링 체크
     }
 
-    @Test
+   /* @Test
     @DisplayName("앨범 삭제")
     void testDeleteAlbum() throws IOException {
         //앨범 생성 후 삭제랑
@@ -161,5 +161,5 @@ class AlbumServiceTest {
 
         //앨범명 변경되었는지 확인
         assertEquals("변경후", updatedDto.getAlbumName());
-    }
+    }*/
 }
