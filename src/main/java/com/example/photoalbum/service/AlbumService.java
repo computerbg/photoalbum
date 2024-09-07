@@ -74,17 +74,17 @@ public class AlbumService {
         Files.createDirectories(Paths.get(Constants.PATH_PREFIX+"/photos/thumb/"+album.getUser().getUserId()+"/"+album.getAlbumId()));
     }
 
-    public List<AlbumDto> getAlbumList(String keyword, String sort,String orderBy){
+    public List<AlbumDto> getAlbumList(String userId,String keyword, String sort,String orderBy){
         List<Album> albums;
         if(Objects.equals(sort,"byName")){
             if(Objects.equals(orderBy,"desc")){
-                albums = albumRepository.findByAlbumNameContainingOrderByAlbumNameDesc(keyword);
+                albums = albumRepository.findByUserUserIdAndAlbumNameContainingOrderByAlbumNameDesc(userId,keyword);
             }
             else if(Objects.equals(orderBy,"asc")){
-                albums = albumRepository.findByAlbumNameContainingOrderByAlbumNameAsc(keyword);
+                albums = albumRepository.findByUserUserIdAndAlbumNameContainingOrderByAlbumNameAsc(userId,keyword);
             }
             else if(Objects.equals(orderBy,"")){
-                albums = albumRepository.findByAlbumNameContainingOrderByAlbumNameAsc(keyword);
+                albums = albumRepository.findByUserUserIdAndAlbumNameContainingOrderByAlbumNameAsc(userId,keyword);
             }
             else{
                 throw new IllegalArgumentException("알 수 없는 정렬 기준입니다");
@@ -92,13 +92,13 @@ public class AlbumService {
             //albums = albumRepository.findByAlbumNameContainingOrderByAlbumNameAsc(keyword);
         } else if (Objects.equals(sort,"byDate")) { //byDate가 디폴트이다 orderBy에 디폴트를 넣어줘야 하나 ?
             if(Objects.equals(orderBy,"desc")){
-                albums = albumRepository.findByAlbumNameContainingOrderByCreatedAtDesc(keyword);
+                albums = albumRepository.findByUserUserIdAndAlbumNameContainingOrderByCreatedAtDesc(userId,keyword);
             }
             else if(Objects.equals(orderBy,"asc")){
-                albums = albumRepository.findByAlbumNameContainingOrderByCreatedAtAsc(keyword);
+                albums = albumRepository.findByUserUserIdAndAlbumNameContainingOrderByCreatedAtAsc(userId,keyword);
             }
             else if(Objects.equals(orderBy,"")){
-                albums = albumRepository.findByAlbumNameContainingOrderByCreatedAtDesc(keyword);
+                albums = albumRepository.findByUserUserIdAndAlbumNameContainingOrderByCreatedAtDesc(userId,keyword);
             }
             else{
                 throw new IllegalArgumentException("알 수 없는 정렬 기준입니다");
